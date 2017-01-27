@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   get '/posts/new' do 
@@ -18,7 +20,14 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/posts/:id/edit' do
+    @post = Post.find(params[:id])
     erb :edit
+  end
+
+  patch '/posts/:id' do
+    post = Post.find(params[:id])
+    post.update!(name: params[:name], content: params[:content])
+    redirect to("/posts/#{post.id}")
   end
 
   get '/posts/:id' do
@@ -28,7 +37,16 @@ class ApplicationController < Sinatra::Base
 
   get '/posts' do
     @posts = Post.all
+    @msg = session[:msg]
     erb :index
+  end
+
+  delete '/posts/:id/delete' do
+    post = Post.find(params[:id])
+    session[:msg] = "#{post.name} was deleted"
+
+    post.destroy
+    redirect to("/posts")
   end
 
 end

@@ -1,4 +1,8 @@
+<%= "What is going on here!? = #{@b}" %>
+
 <h1>These are all the posts</h1>
 <% @posts.each do |post| %>
   <p><%= "#{post.name} :: #{post.content}" %></p>
 <% end %>
+<br>
+<h1> <%= @msg %> </h1>

@@ -1,9 +1,9 @@
-<h1>Edit a post:</h1>
+<h1>Edit post <%= @post.id %>:</h1>
 
-<form method="post" action="/posts<%= @model.id %>">
+<form method="post" action="/posts/<%= @post.id %>">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <p>Post Title:<input type="text" name="name"></p>
-  <p>Post Content:<input type="text" name="content"></p>
+  <p>Post Title:<input type="text" name="name" value="<%= @post.name %>"></p>
+  <p>Post Content:<input type="text" name="content" value ="<%= @post.content %>"></p>
   <br>
   <button type="submit" id="submit" value="submit">Submit</button>
 </form>
