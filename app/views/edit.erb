@@ -1,0 +1,9 @@
+<h1>Edit a post:</h1>
+
+<form method="post" action="/posts<%= @model.id %>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <p>Post Title:<input type="text" name="name"></p>
+  <p>Post Content:<input type="text" name="content"></p>
+  <br>
+  <button type="submit" id="submit" value="submit">Submit</button>
+</form>
